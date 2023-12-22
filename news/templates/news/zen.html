@@ -1,0 +1,15 @@
+{% extends 'news/__base.html' %}
+{% load humanize %}
+{% load mptt_tags %}
+
+{% block content %}
+
+<article class="site-content">
+	<h2>Guía de conducta para {{SITE_NAME}}</h2>
+
+	<p>A todos los usuarios del sitio nos gusta leer y comentar noticias sobre el desarrollo de juegos en español, latinoamérica y México.</p>
+	<p>No se permite hacer spam, publicar noticias fuera del desarrollo de juegos, comportamiento rudo u ofensivo.</p>
+	<p>Se permite enviar noticias en inglés o español, aunque se recomienda comentar en español.</p>
+</article>
+
+{% endblock content %}

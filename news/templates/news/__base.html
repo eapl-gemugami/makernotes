@@ -1,0 +1,95 @@
+{% load static %}{% load humanize %}{% load emaildigest_extra %}<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+
+	<meta property="og:locale" content="es_MX">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="{{SITE_NAME}}">
+	<meta property="og:site_name" content="{{SITE_NAME}}">
+
+	<meta name="theme-color" content="#306998">
+	<meta name="robots" content="index,follow">
+	<meta name="googlebot" content="index,follow">
+
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="emoji" content="🎮">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'news.css'%}">
+	<link rel="icon" type="image/png" sizes="144x144" href="{% static 'icon.png' %}">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+	<title>{% block title %}{% endblock title %}{{SITE_NAME}}</title>
+</head>
+
+<body>
+	<main id="pnmain">
+		<nav id="top-bar">
+			<table width="100%" style="padding:2px">
+				<tbody>
+					<tr>
+						<td style="width:18px; padding-right:4px">
+							<a href={% url 'index' %}><img alt="MX Icon" src="{% static 'icon.png' %}" width="18" height="18" style="border:1px white solid; background-color: white;"></a>
+						</td>
+						<td style="line-height:12pt; height:10px;">
+							<span class="pagetop">
+							<b class="pnname"><a href="{% url 'index' %}">{{SITE_NAME}}</a></b>
+							| {% url 'newest' as url %}
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>noticias</a>
+							| {% url 'threads' as url %}
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>tus conversaciones</a>
+							| {% url 'comments' as url %}
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>comentarios</a>
+							<!--
+							| {% url 'ask' as url %}
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>preguntas</a>
+							| {% url 'show' as url %}
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>te_muestro</a>
+							{% url 'submit' as url %}
+							-->
+							| <a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>enviar noticia</a>
+							</span></td>
+						<td style="text-align:right;padding-right:4px;">
+						<span class="pagetop">
+							{% if user.is_authenticated %}
+							{% url 'accounts_my_profile' as url %}
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>{{user}}</a> ({{user.karma}})
+							| <form method="POST" action="{% url 'logout' %}" class="logout-form">{% csrf_token %}&nbsp;<button class="logout-button">cerrar sesión</button></form>
+							{% else %}
+							<!--
+							{% url 'login' as url %}
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>iniciar sesión</a>
+							-->
+							{% url 'magiclink:login' as url %}
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>iniciar sesión</a>
+
+							{% url 'magiclink:signup' as url %}
+							| <a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>registrarse</a>
+							{% endif %}
+						</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</nav>
+
+{% block content %}{% endblock content %}
+
+		<nav id="pre-footer-bar">
+			<hr>
+			{% if not prevent_footer_subscription_form %}
+				{% digest_subscription_form user=user %}
+			{% endif %}
+		</nav>
+
+		<nav id="footer-bar">
+			<p class="footer-text">{{SITE_NAME}} es la comunidad para platicar sobre Desarrollo de Juegos en México, Latinoamérica y en español.</p>
+		</nav>
+	</main>
+<script type="text/javascript" src="{% static 'news.js'%}"></script>
+</body>
+</html>

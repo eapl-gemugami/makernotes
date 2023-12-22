@@ -1,0 +1,20 @@
+{% extends 'news/__base.html' %}
+
+{% block content %}
+<article class="site-content-dense">
+<form method="POST">{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+	<button type="submit">enviar noticia</button>
+</form>
+<p>
+Deja la dirección URL vacía para enviar una pregunta o iniciar una discusión. Si no hay URL, el texto que coloques aparecerá abajo del título.
+</p>
+<!--
+<p>
+Puedes enviar noticias también con este <a href="{% url 'bookmarklet' %}">favorito</a> en tu navegador.
+</p>
+-->
+</article>
+{% endblock content %}

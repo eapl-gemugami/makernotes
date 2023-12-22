@@ -1,0 +1,8 @@
+{% extends 'accounts/__base.html' %}
+
+{% block content %}
+
+Creaste una invitación para {{invitation.invited_email_address}}.
+<a href="{% url 'accounts_create_invite' %}">¿Crear otra?</a>
+
+{% endblock content %}

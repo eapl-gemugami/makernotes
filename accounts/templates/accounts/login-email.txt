@@ -1,0 +1,7 @@
+DevsVJ MX Noticias
+
+Haz click en el enlace para iniciar sesión. ¡El enlace expira en 4 minutos!
+
+{{ magiclink }}
+
+No envíes este mensaje a nadie, otras personas podrían entrar a tu cuenta.

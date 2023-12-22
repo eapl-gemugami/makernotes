@@ -1,0 +1,13 @@
+{% load humanize %}
+{% load news_extra %}
+	<span class="controls">
+		<span class="smaller">
+			por {%link_user item.user%} <span class="naturaltime" data-orig-time="{{item.created_at.isoformat}}">{{item.created_at|naturaltime}}<span>
+			<!--
+			| flag
+			| hide
+			-->
+			| {{item.points}} punto{{item.points|pluralize}} | <a href="{{item.get_absolute_url}}">{{item.num_comments}} comentario{{item.num_comments|pluralize}}</a></span>
+			{% if item.num_comments == 0 and item.user == request_user %}| <a href="{% url 'edit' pk=item.pk %}">editar</a></span>{% endif %}
+			{% if item.num_comments == 0 and item.user == request_user %}| <a href="{% url 'delete' pk=item.pk %}">borrar</a></span>{% endif %}
+	</span>
