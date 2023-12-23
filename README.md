@@ -3,6 +3,11 @@ Forked from: https://github.com/sebst/pythonic-news/
 
 A Hacker News lookalike written in Python/Django
 
+## Create admin user
+```shell script
+py manage.py createsuperuser
+```
+
 ## Create a virtual env
 ```shell script
 cd ~
