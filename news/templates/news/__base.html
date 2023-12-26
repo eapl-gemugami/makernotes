@@ -39,7 +39,8 @@
 				<tbody>
 					<tr>
 						<td style="width:18px; padding-right:4px">
-							<a href={% url 'index' %}><img alt="MX Icon" src="{% static 'favicon-16x16.png' %}" width="16" height="16" style="border:1px white solid; background-color: white;"></a>
+							<a href={% url 'index' %}><img alt="MX Icon" src="{% static 'favicon-16x16.png' %}"
+								width="16" height="16" style="border:1px white solid; background-color: white;"></a>
 						</td>
 						<td style="line-height:12pt; height:10px;">
 							<span class="pagetop">
@@ -50,26 +51,21 @@
 							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>tus conversaciones</a>
 							| {% url 'comments' as url %}
 							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>comentarios</a>
-							<!--
 							| {% url 'ask' as url %}
 							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>preguntas</a>
 							| {% url 'show' as url %}
-							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>te_muestro</a>
+							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>muestra</a>
 							{% url 'submit' as url %}
-							-->
 							| <a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>enviar noticia</a>
 							</span></td>
 						<td style="text-align:right;padding-right:4px;">
 						<span class="pagetop">
-							{% if user.is_authenticated %}
+						{% if user.is_authenticated %}
 							{% url 'accounts_my_profile' as url %}
 							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>{{user}}</a> ({{user.karma}})
-							| <form method="POST" action="{% url 'logout' %}" class="logout-form">{% csrf_token %}&nbsp;<button class="logout-button">cerrar sesión</button></form>
-							{% else %}
-							<!--
-							{% url 'login' as url %}
-							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>iniciar sesión</a>
-							-->
+							| <form method="POST" action="{% url 'logout' %}" class="logout-form">{% csrf_token %}
+								<button class="logout-button">cerrar sesión</button></form>
+						{% else %}
 							{% url 'magiclink:login' as url %}
 							<a href="{{ url }}" {% if url == request.path %}class="active"{% endif %}>iniciar sesión</a>
 
@@ -83,12 +79,11 @@
 		</nav>
 
 {% block content %}{% endblock content %}
-
 		<nav id="pre-footer-bar">
 			<hr>
-			{% if not prevent_footer_subscription_form %}
-				{% digest_subscription_form user=user %}
-			{% endif %}
+		{% if not prevent_footer_subscription_form %}
+			{% digest_subscription_form user=user %}
+		{% endif %}
 		</nav>
 
 		<nav id="footer-bar">
